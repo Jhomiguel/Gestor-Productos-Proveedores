@@ -91,13 +91,32 @@ class Producto extends Component {
           <button onClick={(e)=>this.fSubmit(e)} className="myButton">Agregar </button>
         </form>
         <pre>
-          {datas.map((data, i) =>
-            <li key={i} className="myList">
-              {i+1}. {data.name}, {data.descripcion}, {data.fecha_venc},{data.id_proveedor}
-              <button onClick={()=>this.fRemove(i)} className="myListButton">Eliminar </button>
-              <button onClick={()=>this.fEdit(i)} className="myListButton">Modificar </button>
-            </li>
-          )}
+
+        <table className="table">
+              <thead>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Descripcion</th>
+              <th>Fecha_Venc</th>
+              <th>Id_Proveedor</th>
+              <th>Acciones</th>
+              </thead>
+            <tbody>
+            {datas.map((data, i) =>(
+              <tr key={i}>
+                <td>{i+1}</td>
+                <td>{data.name}</td>
+                <td>{data.descripcion}</td>
+                <td>{data.fecha_venc}</td>
+                <td>{data.id_proveedor}</td>
+                <td>
+                <button onClick={()=>this.fRemove(i)} className="myListButton">Eliminar </button>
+                <button onClick={()=>this.fEdit(i)} className="myListButton">Modificar </button>
+                </td>
+              </tr>
+            ))}
+            </tbody>
+            </table>
         </pre>
     
       </div>

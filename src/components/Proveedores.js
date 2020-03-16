@@ -87,13 +87,29 @@ class Proveedor extends Component {
             <button onClick={(e)=>this.fSubmit(e)} className="myButton">Agregar</button>
           </form>
           <pre>
-            {datas.map((data, i) =>
-              <li key={i} className="myList">
-                {i+1}. {data.name}, {data.direccion}, {data.telefono}
+            <table className="table">
+              <thead>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Direccion</th>
+              <th>Telefono</th>
+              <th>Acciones</th>
+              </thead>
+            <tbody>
+            {datas.map((data, i) =>(
+              <tr key={i}>
+                <td>{i+1}</td>
+                <td>{data.name}</td>
+                <td>{data.direccion}</td>
+                <td>{data.telefono}</td>
+                <td>
                 <button onClick={()=>this.fRemove(i)} className="myListButton">Eliminar </button>
                 <button onClick={()=>this.fEdit(i)} className="myListButton">Modificar </button>
-              </li>
-            )}
+                </td>
+              </tr>
+            ))}
+            </tbody>
+            </table>
           </pre>
         </div>
       );
