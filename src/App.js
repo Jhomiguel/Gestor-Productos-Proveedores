@@ -6,7 +6,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state={
-      title: 'React Simple CRUD Application',
+      title: 'Gestor Productos',
       act: 0,
       index: '',
       datas: []
@@ -23,17 +23,21 @@ class App extends Component {
 
     let datas = this.state.datas;
     let name = this.refs.name.value;
-    let address = this.refs.address.value;
+    let descripcion = this.refs.descripcion.value;
+    let fecha_venc = this.refs.fecha.value;
+    let id_proveedor = this.refs.proveedor.value;
 
-    if(this.state.act === 0){   //new
+    if(this.state.act === 0){   
       let data = {
-        name, address
+        name, descripcion, fecha_venc, id_proveedor
       }
       datas.push(data);
-    }else{                      //update
+    }else{                      
       let index = this.state.index;
       datas[index].name = name;
-      datas[index].address = address;
+      datas[index].descripcion = descripcion;
+      datas[index].fecha_venc = fecha_venc;
+      datas[index].id_proveedor = id_proveedor;
     }    
 
     this.setState({
@@ -59,7 +63,9 @@ class App extends Component {
   fEdit = (i) => {
     let data = this.state.datas[i];
     this.refs.name.value = data.name;
-    this.refs.address.value = data.address;
+    this.refs.descripcion.value = data.descripcion;
+    this.refs.fecha.value = data.fecha_venc;
+    this.refs.id_proveedor = data.id_proveedor;
 
     this.setState({
       act: 1,
@@ -75,13 +81,30 @@ class App extends Component {
       <div className="App">
         <h2>{this.state.title}</h2>
         <form ref="myForm" className="myForm">
-          <input type="text" ref="name" placeholder="your name" className="formField" />
-          <input type="text" ref="address" placeholder="your address" className="formField" />
-          <button onClick={(e)=>this.fSubmit(e)} className="myButton">submit </button>
+          <input type="text" ref="name" placeholder="Nombre del producto" className="formField" />
+          <input type="text" ref="descripcion" placeholder="Descripcion" className="formField" />
+        
+          <input type="number" ref="proveedor" placeholder="Id_Proveedor" className="formField" />
+          <input type="date" ref="fecha" placeholder="Fecha_Venc" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09" className= "formField"></input>
+
+          <button onClick={(e)=>this.fSubmit(e)} className="myButton">Agregar </button>
         </form>
         <pre>
           {datas.map((data, i) =>
-          <table>
+            <li key={i} className="myList">
+              {i+1}. {data.name}, {data.descripcion}, {data.fecha_venc},{data.id_proveedor}
+              <button onClick={()=>this.fRemove(i)} className="myListButton">Eliminar </button>
+              <button onClick={()=>this.fEdit(i)} className="myListButton">Modificar </button>
+            </li>
+          )}
+        </pre>
+      </div>
+    );
+  }
+}
+
+export default App;
+/* <table>
             <thead>
             <tr>
             <th>Id</th>
@@ -92,20 +115,14 @@ class App extends Component {
             </tr>
             </thead>
           <tbody>
-
-          </tbody>  
-
-          </table>
-            <li key={i} className="myList">
-              {i+1}. {data.name}, {data.address}
+            <tr>
+              {/* {datas.map((data,i)=>
+              <td key={i}>{i+1}</td>
+              <td> {data.name}</td>
+              <td>{data.address}</td>
               <button onClick={()=>this.fRemove(i)} className="myListButton">remove </button>
               <button onClick={()=>this.fEdit(i)} className="myListButton">edit </button>
-            </li>
-          )}
-        </pre>
-      </div>
-    );
-  }
-}
-
-export default App;
+              )} }
+            </tr>
+          </tbody> 
+          </table> */
